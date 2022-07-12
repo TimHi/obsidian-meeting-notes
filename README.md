@@ -8,7 +8,7 @@ By default the plugin uses the name `"MeetingNotes"` as the `Meeting Folder loca
 
 When creating a file in the specified `Meeting Folder location`the plugin automatically fills it with a template for consistent meeting notes.
 
-![example image]("./../img/demo.png")
+![example image](./../img/demo.png)
 
 ## Development
 
