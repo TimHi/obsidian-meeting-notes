@@ -1,5 +1,7 @@
 # Obsidian Meeting Note Plugin
 
+After being frustrated of creating the same structure for every meeting, copy pasting content I decided to create this plugin.
+
 ## Setup  
 
 By default the plugin uses the name `"MeetingNotes"` as the `Meeting Folder location`. You can change it in the settings to any name you like.
@@ -13,6 +15,14 @@ When creating a file in the specified `Meeting Folder location`the plugin automa
 ## Development
 
 See [obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin#first-time-developing-plugins) for detailed instructions on setting up the plugin and making changes.
+
+## Outlook
+
+Some things I want to add:  
+
+- Templating the file through the settings
+- Multiple names for the meeting folder
+- ...?
 
 ## Contributing
 
