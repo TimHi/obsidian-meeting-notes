@@ -1,15 +1,16 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-meeting-notes",
 	"version": "1.0.1",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "(https://obsidian.md) Plugin to automatically create a meeting note if a new file is created in a meeting folder.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"version": "node version-bump.mjs && git add manifest.json versions.json"
+		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"copy": "sh deploy.sh"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": ["meeting", "notes", "obsidianmd", "obsidianmd", "plugin"],
+	"author": "Tim Hiller",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
