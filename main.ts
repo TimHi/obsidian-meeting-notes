@@ -1,4 +1,4 @@
-import { App, Plugin, PluginSettingTab, Setting, TAbstractFile, TFile } from 'obsidian';
+import { App, Plugin, PluginSettingTab, Setting, TFile } from 'obsidian';
 import FileRenderer from "./src/filehandler/FileRenderer"
 
 interface MeetingNotesSettings {
@@ -11,11 +11,10 @@ const DEFAULT_SETTINGS: MeetingNotesSettings = {
 
 export default class MeetingNotes extends Plugin {
 	settings: MeetingNotesSettings;
-	fileHandler: FileRenderer
+	fileHandler: FileRenderer;
 	
 	async createFileCallback(file: TFile, meetingFolderName: string) {
-		await this.loadSettings(); //Refresh settings to get the correct folder, TODO: check potential better solutions which save this read 
-		if(file.parent.name === meetingFolderName){
+		if(file.parent.name === meetingFolderName) {
 			this.fileHandler.FillNewNote(file);			
 		}
 	}
@@ -27,11 +26,11 @@ export default class MeetingNotes extends Plugin {
 		this.addSettingTab(new MeetingNotesSettingTab(this.app, this));
 
 		this.app.vault.on("create", async (file: TFile) => {
-			if(file.extension !== undefined){
+			if(file.extension !== undefined) {
 				await this.createFileCallback(file, this.settings.meetingNoteFolder);	
 			}
 		});
-		console.log("Info: Community plugin Meeting notes loaded.")
+		console.log("Info: Community plugin Meeting notes loaded.");
 	}
 
 	onunload() {
