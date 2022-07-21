@@ -61,6 +61,6 @@ export default class FileService {
      * @returns True if the file is a Markdown file, false otherwise
      */
     isMarkdownFile(file: TFile){
-        return file.extension === ".md";
+        return file.extension === "md";
     }
 }

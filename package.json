@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-meeting-notes",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "(https://obsidian.md) Plugin to automatically create a meeting note if a new file is created in a meeting folder.",
 	"main": "main.js",
 	"scripts": {
