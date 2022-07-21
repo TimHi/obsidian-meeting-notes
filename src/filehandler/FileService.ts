@@ -32,7 +32,7 @@ export default class FileService {
 		file: TFile,
 		meetingFolderName: string,
 	) {
-		return this.isFileInMeetingFolder(file, meetingFolderName) && this.isEmptyFile(file);
+		return this.isFileInMeetingFolder(file, meetingFolderName) && this.isEmptyFile(file) && this.isMarkdownFile(file);
 	}
 
     /**
@@ -53,5 +53,14 @@ export default class FileService {
      */
     isFileInMeetingFolder(file: TFile, meetingFolderName: string){
         return file.parent.name === meetingFolderName;
+    }
+
+    /**
+     * Checks wether a given file has the Markdown (.md) extension.
+     * @param file File to check
+     * @returns True if the file is a Markdown file, false otherwise
+     */
+    isMarkdownFile(file: TFile){
+        return file.extension === ".md";
     }
 }
