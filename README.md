@@ -2,10 +2,6 @@
 
 After being frustrated of creating the same structure for every meeting, copy pasting content I decided to create this plugin.
 
-# Important note regarding Obisidian 1.0.0
-
-The plugin seems to be incompatible with Obsidian 1.0.0 see: [Duplicate header](https://github.com/TimHi/obsidian-meeting-notes/issues/1).
-
 ## Setup  
 
 By default the plugin uses the name `"MeetingNotes"` as the `Meeting Folder location`. You can change it in the settings to any name you like.
