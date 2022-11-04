@@ -4,7 +4,7 @@ export default class FileRenderer {
     vault: Vault;
 
     //TODO: Export to settings create template for it
-    defaultContent  = "# {{Date}} Topic \n \n## Participants \n \n  \n \n---- \n \n## Preperation \n \n  \n \n---- \n \n## Notes \n \n  \n \n---- \n \n## Follow ups \n \n  \n \n---- \n \n ";
+    defaultContent  = "# {{Date}} Topic \n \n## Participants \n \n  \n \n---- \n \n## Preparation \n \n  \n \n---- \n \n## Notes \n \n  \n \n---- \n \n## Follow ups \n \n  \n \n---- \n \n ";
     
     constructor(vault: Vault){
         this.vault = vault;
