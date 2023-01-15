@@ -1,6 +1,6 @@
-import { App, Plugin, PluginSettingTab, Setting, TFile } from 'obsidian';
-import FileService from 'src/filehandler/FileService';
-import FileRenderer from "./src/filehandler/FileRenderer"
+import { App, Plugin, PluginSettingTab, Setting, TFile } from "obsidian";
+import FileService from "src/filehandler/FileService";
+import FileRenderer from "./src/filehandler/FileRenderer";
 
 interface MeetingNotesSettings {
 	meetingNoteFolder: string;
@@ -8,18 +8,18 @@ interface MeetingNotesSettings {
 
 const DEFAULT_SETTINGS: MeetingNotesSettings = {
 	meetingNoteFolder: "MeetingNotes",
-}
+};
 
 export default class MeetingNotes extends Plugin {
 	settings: MeetingNotesSettings;
 	fileHandler: FileRenderer;
 	fileService: FileService;
 
-	/**
-	 * Construct the needed services.
-	 */
 	private registerServices() {
-		this.fileHandler = new FileRenderer(this.app.vault);
+		this.fileHandler = new FileRenderer(
+			this.app.vault,
+			this.app.fileManager
+		);
 		this.fileService = new FileService(this.fileHandler);
 	}
 
@@ -32,19 +32,24 @@ export default class MeetingNotes extends Plugin {
 		this.app.vault.on("create", async (file: TFile) => {
 			// on "create" callback is also triggered when folders are created, filter by checking wether the
 			// new file has an extension
-			if(file.extension !== undefined) {
-				await this.fileService.createFileCreationCallback(file, this.settings.meetingNoteFolder);	
+			if (file.extension !== undefined) {
+				await this.fileService.createFileCreationCallback(
+					file,
+					this.settings.meetingNoteFolder
+				);
 			}
 		});
 		console.log("Info: Community plugin Meeting notes loaded.");
 	}
 
-	onunload() {
-
-	}
+	onunload() {}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		this.settings = Object.assign(
+			{},
+			DEFAULT_SETTINGS,
+			await this.loadData()
+		);
 	}
 
 	async saveSettings() {
@@ -61,23 +66,25 @@ class MeetingNotesSettingTab extends PluginSettingTab {
 	}
 
 	display(): void {
-		const {containerEl} = this;
+		const { containerEl } = this;
 
 		containerEl.empty();
 
-		containerEl.createEl('h2', {text: 'Meeting Notes Settings'});
+		containerEl.createEl("h2", { text: "Meeting Notes Settings" });
 
 		new Setting(containerEl)
-			.setName('Meeting Notes Folder Name')
-			.setDesc('Folder which will notes will be created with the template')
-			.addText(text => text
-				.setPlaceholder('Enter your meeting folder name')
-				.setValue(this.plugin.settings.meetingNoteFolder)
-				.onChange(async (value) => {
-					this.plugin.settings.meetingNoteFolder = value;
-					await this.plugin.saveSettings();
-				}));
-	}	
+			.setName("Meeting Notes Folder Name")
+			.setDesc(
+				"Folder which will notes will be created with the template"
+			)
+			.addText((text) =>
+				text
+					.setPlaceholder("Enter your meeting folder name")
+					.setValue(this.plugin.settings.meetingNoteFolder)
+					.onChange(async (value) => {
+						this.plugin.settings.meetingNoteFolder = value;
+						await this.plugin.saveSettings();
+					})
+			);
+	}
 }
-
-
