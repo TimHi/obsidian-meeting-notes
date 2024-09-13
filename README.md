@@ -4,7 +4,8 @@ After being frustrated of creating the same structure for every meeting, copy pa
 
 ## Setup  
 
-By default the plugin uses the name `"MeetingNotes"` as the `Meeting Folder location`. You can change it in the settings to any name you like.
+By default the plugin uses the name `"MeetingNotes"` as the `Meeting Folder location`. You can change it in the settings to any name you like. The content of the created note can be changed through the settings. A default template is located in `src/util/constants.ts`.
+`{{Date}}` can be used to get the current date.
 
 ## Demo  
 
@@ -20,7 +21,6 @@ See [obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugi
 
 Some things I want to add:  
 
-- Templating the file through the settings
 - Multiple names for the meeting folder
 - ...?
 

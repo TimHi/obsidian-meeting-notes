@@ -12,10 +12,15 @@ export default class FileService {
 	 * Create a new file creation callback, fills the new note if it is a meeting now
 	 * @param file Newly created file
 	 * @param meetingFolderName Name of the user defined folder
+	 * @param template Template string obtained from the user settings
 	 */
-	async createFileCreationCallback(file: TFile, meetingFolderName: string) {
+	async createFileCreationCallback(
+		file: TFile,
+		meetingFolderName: string,
+		template: string
+	) {
 		if (this.isNewMeetingNote(file, meetingFolderName)) {
-			await this.fileRenderer.FillNewNote(file);
+			await this.fileRenderer.FillNewNote(file, template);
 			await this.fileRenderer.ChangeFileName(file);
 		}
 	}

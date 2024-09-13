@@ -6,10 +6,6 @@ export default class FileRenderer {
 	vault: Vault;
 	fileManager: FileManager;
 
-	//TODO: Export to settings create template for it
-	defaultContent =
-		"# {{Date}} Topic \n \n## Participants \n \n  \n \n---- \n \n## Preparation \n \n  \n \n---- \n \n## Notes \n \n  \n \n---- \n \n## Follow ups \n \n  \n \n---- \n \n ";
-
 	constructor(vault: Vault, fileManager: FileManager) {
 		this.vault = vault;
 		this.fileManager = fileManager;
@@ -28,9 +24,9 @@ export default class FileRenderer {
 		await this.fileManager.renameFile(file, newPath);
 	}
 
-	async FillNewNote(file: TFile) {
+	async FillNewNote(file: TFile, template: string) {
 		const todayDate = new Date().toLocaleDateString().toString();
-		const content = this.defaultContent.replace("{{Date}}", todayDate);
+		const content = template.replaceAll("{{Date}}", todayDate);
 
 		try {
 			await this.vault.modify(file, content);

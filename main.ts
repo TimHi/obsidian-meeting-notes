@@ -1,13 +1,16 @@
 import { App, Plugin, PluginSettingTab, Setting, TFile } from "obsidian";
 import FileService from "src/filehandler/FileService";
 import FileRenderer from "./src/filehandler/FileRenderer";
+import { DEFAULT_TEMPLATE } from "src/util/constants";
 
 interface MeetingNotesSettings {
 	meetingNoteFolder: string;
+	template: string;
 }
 
 const DEFAULT_SETTINGS: MeetingNotesSettings = {
 	meetingNoteFolder: "MeetingNotes",
+	template: DEFAULT_TEMPLATE,
 };
 
 export default class MeetingNotes extends Plugin {
@@ -35,7 +38,8 @@ export default class MeetingNotes extends Plugin {
 			if (file.extension !== undefined) {
 				await this.fileService.createFileCreationCallback(
 					file,
-					this.settings.meetingNoteFolder
+					this.settings.meetingNoteFolder,
+					this.settings.template
 				);
 			}
 		});
@@ -67,16 +71,12 @@ class MeetingNotesSettingTab extends PluginSettingTab {
 
 	display(): void {
 		const { containerEl } = this;
-
 		containerEl.empty();
-
 		containerEl.createEl("h2", { text: "Meeting Notes Settings" });
 
 		new Setting(containerEl)
 			.setName("Meeting Notes Folder Name")
-			.setDesc(
-				"Folder which will notes will be created with the template"
-			)
+			.setDesc("Folder which will contain the generated notes")
 			.addText((text) =>
 				text
 					.setPlaceholder("Enter your meeting folder name")
@@ -84,6 +84,25 @@ class MeetingNotesSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.meetingNoteFolder = value;
 						await this.plugin.saveSettings();
+					})
+			);
+
+		new Setting(containerEl)
+			.setName("Template")
+			.setDesc(
+				"Use the default template or define your own. Hint: {{Date}} will be resolved to the current date"
+			)
+			.addTextArea((text) =>
+				text
+					.setPlaceholder(DEFAULT_TEMPLATE)
+					.setValue(this.plugin.settings.template)
+					.onChange(async (value) => {
+						this.plugin.settings.template = value;
+						await this.plugin.saveSettings();
+					})
+					.then((text) => {
+						text.inputEl.style.width = "100%";
+						text.inputEl.rows = 10;
 					})
 			);
 	}
