@@ -1,7 +1,7 @@
 export const DEFAULT_TEMPLATE = `
-# {{Date}} Topic {{Date}}
+# {{Date}} Topic 
 
-## Participants
+## Participants 
 
 ---- 
 
